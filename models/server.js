@@ -1,4 +1,6 @@
 const express = require("express");
+const cors = require("cors");
+const { readdirSync } = require("fs");
 
 class Server {
     constructor() {
@@ -13,13 +15,16 @@ class Server {
     }
 
     middlewares() {
+        // this.app.use(cors);
         this.app.use(express.static("public"));
     }
 
     routes() {
-        this.app.get("/", (req, res) => {
-            res.send("Hello World");
-        });
+        // this.app.use("/api/users", require("../routes/user"));
+
+        readdirSync("./routes").map((r) =>
+            this.app.use("/api", require("../routes/" + r))
+        );
     }
 
     listen() {
