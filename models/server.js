@@ -8,6 +8,7 @@ class Server {
         // Middlewares
         this.middlewares();
 
+        // Rutas
         this.routes();
     }
 
